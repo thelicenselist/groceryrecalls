@@ -1,0 +1,22 @@
+name: Refresh recall data
+on:
+  schedule:
+    - cron: "17 11 * * *"   # daily, 11:17 UTC (~6:17am Central)
+  workflow_dispatch: {}      # manual "run now" button
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python fetch_recalls.py
+      - name: Commit if changed
+        run: |
+          git config user.name "recall-bot"
+          git config user.email "actions@github.com"
+          git add costco/index.html
+          git diff --cached --quiet || git commit -m "Daily recall refresh"
+          git push
