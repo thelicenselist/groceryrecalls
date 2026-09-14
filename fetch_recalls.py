@@ -25,20 +25,32 @@ except urllib.error.HTTPError as e:
         raise
     data = {"results": []}
 
-ICONS = [("egg","🥚"),("chicken","🍗"),("poultry","🍗"),("beef","🥩"),
- ("steak","🥩"),("pork","🥓"),("salad","🥬"),("lettuce","🥬"),
- ("greens","🥬"),("spinach","🥬"),("cheese","🧀"),("milk","🥛"),
- ("dairy","🥛"),("yogurt","🥛"),("bread","🥐"),("madeleine","🥐"),
- ("beignet","🥐"),("bakery","🥐"),("cookie","🍪"),("pizza","🍕"),
- ("salmon","🐟"),("fish","🐟"),("seafood","🦐"),("shrimp","🦐"),
- ("fruit","🍎"),("apple","🍎"),("berr","🫐"),("nut","🥜"),
- ("peanut","🥜"),("chocolate","🍫"),("candy","🍬"),("formula","🍼"),
- ("infant","🍼"),("soup","🥫"),("sauce","🥫"),("dressing","🥫"),
- ("frozen","🧊"),("ice cream","🍨")]
+import re as _re
+ICONS = [
+ # specific product types first
+ ("madeleine","🥐"),("beignet","🥐"),("croissant","🥐"),("pastry","🥐"),
+ ("bread","🥐"),("bakery","🥐"),("cookie","🍪"),("cake","🍰"),
+ ("pizza","🍕"),("smoothie","🧃"),("cider","🧃"),("juice","🧃"),
+ ("soup","🥫"),("sauce","🥫"),("dressing","🥫"),("salsa","🥫"),
+ ("ice cream","🍨"),("yogurt","🥛"),("chocolate","🍫"),("candy","🍬"),
+ ("granola","🌾"),("oat","🌾"),("oats","🌾"),("chia","🌾"),
+ ("seed","🌾"),("seeds","🌾"),("cereal","🌾"),
+ # proteins and produce
+ ("chicken","🍗"),("poultry","🍗"),("turkey","🍗"),("beef","🥩"),
+ ("steak","🥩"),("pork","🥓"),("bacon","🥓"),("salmon","🐟"),
+ ("fish","🐟"),("tuna","🐟"),("seafood","🦐"),("shrimp","🦐"),
+ ("salad","🥬"),("lettuce","🥬"),("greens","🥬"),("spinach","🥬"),
+ ("broccoli","🥦"),("fruit","🍎"),("apple","🍎"),("berry","🫐"),
+ ("berries","🫐"),("infant","🍼"),("formula","🍼"),
+ # generic ingredients LAST so they only win when nothing above hits
+ ("cheese","🧀"),("milk","🥛"),("dairy","🥛"),("butter","🧈"),
+ ("egg","🥚"),("eggs","🥚"),("nut","🥜"),("peanut","🥜"),
+ ("almond","🥜"),("frozen","🧊")]
 def pick_icon(desc):
     d = (desc or "").lower()
     for kw, ico in ICONS:
-        if kw in d: return ico
+        if _re.search(r"\b" + _re.escape(kw) + r"s?\b", d):
+            return ico
     return "🛒"
 
 cards = []
