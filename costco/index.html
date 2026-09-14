@@ -67,11 +67,11 @@ footer a{color:var(--sub)}
   <div class="signup">
     <h2>Get alerted when Costco recalls something</h2>
     <p>Free email alerts the day a recall drops, plus a short weekly digest. No spam, unsubscribe anytime.</p>
-    <!--BEEHIIV_EMBED-->
+    <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="b7ffbc5d-8285-4d41-a89b-91e80b0c027d"></script>
   </div>
 <input id="rsearch" type="search"
  placeholder="Search these recalls — brand, product, or code number"
- style="width:100%;padding:12px 16px;font-size:1rem;border:1px solid var(--line);border-radius:12px;margin:0 0 6px;background:#fff">
+ style="width:100%;padding:12px 16px 12px 44px;font-size:1rem;border:2px solid var(--accent);border-radius:12px;margin:0 0 6px;background:#fff url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2218%22 height=%2218%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%235b6470%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22/><line x1=%2221%22 y1=%2221%22 x2=%2216.65%22 y2=%2216.65%22/></svg>') no-repeat 14px center">
 <p id="rnone" style="display:none;color:var(--sub);padding:12px 4px">No matches in current recalls. If you're worried about a specific item, check the official list at fda.gov.</p>
 
   <section aria-label="Current recalls">
@@ -432,5 +432,6 @@ document.getElementById('rsearch').addEventListener('input', function(){
     (q && shown === 0) ? '' : 'none';
 });
 </script>
+<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 </body>
 </html>
