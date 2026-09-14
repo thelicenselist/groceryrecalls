@@ -64,6 +64,10 @@ footer a{color:var(--sub)}
     <p>Free email alerts the day a recall drops, plus a short weekly digest. No spam, unsubscribe anytime.</p>
     <!--BEEHIIV_EMBED-->
   </div>
+<input id="rsearch" type="search"
+ placeholder="Search these recalls — brand, product, or code number"
+ style="width:100%;padding:12px 16px;font-size:1rem;border:1px solid var(--line);border-radius:12px;margin:0 0 6px;background:#fff">
+<p id="rnone" style="display:none;color:var(--sub);padding:12px 4px">No matches in current recalls. If you're worried about a specific item, check the official list at fda.gov.</p>
 
   <section aria-label="Current recalls">
     <!--RECALLS-->
@@ -82,5 +86,17 @@ footer a{color:var(--sub)}
 <footer class="wrap">
   <p>groceryrecalls.com is an independent information site, not affiliated with Costco Wholesale Corporation or any government agency. Recall data is drawn from public FDA sources and provided for general guidance — always follow the official recall notice. &middot; <a href="/">Home</a></p>
 </footer>
+<script>
+document.getElementById('rsearch').addEventListener('input', function(){
+  var q = this.value.trim().toLowerCase(), shown = 0;
+  document.querySelectorAll('article.recall').forEach(function(card){
+    var hit = !q || card.textContent.toLowerCase().indexOf(q) !== -1;
+    card.style.display = hit ? '' : 'none';
+    if (hit) shown++;
+  });
+  document.getElementById('rnone').style.display =
+    (q && shown === 0) ? '' : 'none';
+});
+</script>
 </body>
 </html>
