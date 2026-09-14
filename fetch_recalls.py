@@ -75,8 +75,10 @@ def _sort_key(r):
     return (terminated, -d)
 
 cards = []
+ongoing_count = 0
 for rec in sorted(data.get("results") or [], key=_sort_key):
     status = esc(rec.get("status",""))
+    if status.lower() == "ongoing": ongoing_count += 1
     badge = "badge-active" if status.lower() == "ongoing" else "badge-done"
     title, sizes, upcs = parse_product(rec.get("product_description"))
     icon = pick_icon(rec.get("product_description"))
@@ -104,5 +106,10 @@ html = tpl.replace("<!--RECALLS-->", "\n".join(cards) if cards
                    else "<p class='allclear'>No Costco food recalls in the current FDA feed. Good news.</p>")
 html = html.replace("<!--UPDATED-->", updated)
 html = html.replace("<!--COUNT-->", str(len(cards)))
+if ongoing_count == 0:
+    sline = '<span class="statusline ok">✓ No active Costco recalls right now</span>'
+else:
+    sline = f'<span class="statusline warn">⚠ {ongoing_count} active recall{"s" if ongoing_count != 1 else ""} — check your kitchen</span>'
+html = html.replace("<!--STATUS-->", sline)
 open("costco/index.html","w", encoding="utf-8").write(html)
 print(f"Wrote costco/index.html — {len(cards)} recalls, updated {updated}")
