@@ -53,18 +53,39 @@ def pick_icon(desc):
             return ico
     return "🛒"
 
+def parse_product(desc):
+    d = desc or "Unnamed product"
+    upcs = _re.findall(r"UPC[:\s#]*([0-9][0-9 \-]{9,18}[0-9])", d)
+    sizes = _re.findall(
+        r"\b\d+(?:\.\d+)?\s?(?:fl\.? ?oz|oz|lb|lbs|g|kg|ml|mL|L|count|ct)\b\.?",
+        d, _re.IGNORECASE)
+    t = d.split(";")[0]
+    for m in [" UPC"," upc"," Item #"," item #"," Item#",", net wt",
+              " net wt"," Net Wt",", Net"]:
+        i = t.find(m)
+        if i > 8: t = t[:i]
+    t = t.strip(" ,.-")
+    if len(t) > 90: t = t[:90].rsplit(" ", 1)[0] + "…"
+    return t, sizes[:3], upcs[:3]
+
 cards = []
 for rec in data.get("results", []):
     status = esc(rec.get("status",""))
     badge = "badge-active" if status.lower() == "ongoing" else "badge-done"
+    title, sizes, upcs = parse_product(rec.get("product_description"))
+    chips = "".join(f'<span class="chip">{esc(s)}</span>' for s in sizes)
+    chips += "".join(f'<span class="chip">UPC {esc(u)}</span>' for u in upcs)
     cards.append(f"""
     <article class="recall">
       <div class="recall-head">
         <span class="badge {badge}">{esc(status) or 'Status unknown'}</span>
         <time>{fmt_date(rec.get('recall_initiation_date'))}</time>
       </div>
-      <h3>{pick_icon(rec.get('product_description'))} {esc(rec.get('product_description','Unnamed product'))[:200]}</h3>
+      <h3>{pick_icon(rec.get('product_description'))} {esc(title)}</h3>
+      {f'<div class="chips">{chips}</div>' if chips else ''}
       <p class="reason"><strong>Why:</strong> {esc(rec.get('reason_for_recall',''))[:400]}</p>
+      <details class="fulldesc"><summary>Full product details</summary>
+        <p>{esc(rec.get('product_description',''))[:900]}</p></details>
       <p class="meta">Recalled by {esc(rec.get('recalling_firm',''))} &middot;
          Class {esc(rec.get('classification','?')).replace('Class ','')} &middot;
          Lot/code info: {esc(rec.get('code_info','see official notice'))[:150]}</p>
