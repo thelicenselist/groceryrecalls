@@ -72,11 +72,16 @@ footer a{color:var(--sub)}
 <input id="rsearch" type="search"
  placeholder="Search these recalls — brand, product, or code number"
  style="width:100%;padding:12px 16px 12px 44px;font-size:1rem;border:2px solid var(--accent);border-radius:12px;margin:0 0 6px;background:#fff url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2218%22 height=%2218%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%235b6470%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22/><line x1=%2221%22 y1=%2221%22 x2=%2216.65%22 y2=%2216.65%22/></svg>') no-repeat 14px center">
+<select id="rsort" style="width:100%;padding:10px 14px;font-size:.95rem;border:1px solid var(--line);border-radius:12px;margin:0 0 6px;background:#fff;color:var(--ink)">
+  <option value="active">Sort: Active recalls first</option>
+  <option value="new">Sort: Newest first</option>
+  <option value="type">Sort: Food type</option>
+</select>
 <p id="rnone" style="display:none;color:var(--sub);padding:12px 4px">No matches in current recalls. If you're worried about a specific item, check the official list at fda.gov.</p>
 
   <section aria-label="Current recalls">
     
-    <article class="recall">
+    <article class="recall" data-d="20260529" data-s="terminated" data-t="🥐">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>May 29, 2026</time>
@@ -91,7 +96,7 @@ footer a{color:var(--sub)}
          Lot/code info: Sell By dates: Single retail pack: 2/4/2027, 2/5/2027, 2/23/2027, 2/24/2027, 3/9/2027, 3/10/2027, 3/17/2027, 3/18/2027, 3/24/2027, 3/25/2027, 4/7/2027</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20260406" data-s="terminated" data-t="🥐">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>April 06, 2026</time>
@@ -106,7 +111,7 @@ footer a{color:var(--sub)}
          Lot/code info: Pack Date: 3/30/26 to 4/6/26 Sell By: 04/2/26 to 4/9/26</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20260131" data-s="terminated" data-t="🥐">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>January 31, 2026</time>
@@ -121,7 +126,7 @@ footer a{color:var(--sub)}
          Lot/code info: Pack Dates:     Jan 16, 26 - Jan 30, 26 Sell by Dates: Jan 19, 26 -   Feb 2, 26</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20251107" data-s="terminated" data-t="🥫">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>November 07, 2025</time>
@@ -136,7 +141,7 @@ footer a{color:var(--sub)}
          Lot/code info: Sell By Dates between 10/17/25 and 11/9/25</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20251107" data-s="terminated" data-t="🥫">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>November 07, 2025</time>
@@ -151,7 +156,7 @@ footer a{color:var(--sub)}
          Lot/code info: Sell By Dates between 10/17/25 and 11/9/25</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20240703" data-s="terminated" data-t="🥬">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>July 03, 2024</time>
@@ -166,7 +171,7 @@ footer a{color:var(--sub)}
          Lot/code info: Sell by date from 5/16/24 through Sell by date 7/6/24</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230928" data-s="terminated" data-t="🍫">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>September 28, 2023</time>
@@ -181,7 +186,7 @@ footer a{color:var(--sub)}
          Lot/code info: Lot Code 3212 EL 14 (Mfr Date 7/31/2023, Best Before Date 7/31/2025); Lot Code 3213 EL 1414 (Mfr Date 8/1/2023, Best Before Date 8/1/2025), Lot Code 3</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230607" data-s="terminated" data-t="🧃">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>June 07, 2023</time>
@@ -196,7 +201,7 @@ footer a{color:var(--sub)}
          Lot/code info: Lot Codes: 4224202, 4313202, 4314202, 4363202, 4364202, 4017302, 4018302, 4042306, 4043306, 4060306.  Best By dates:  02/11/2024, 05/10/2024, 05/11/20</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230607" data-s="terminated" data-t="🧊">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>June 07, 2023</time>
@@ -211,7 +216,7 @@ footer a{color:var(--sub)}
          Lot/code info: Lot Codes: 4018305, 4019305.  Best By Dates: 7/19/2024, 7/20/2024.</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230607" data-s="terminated" data-t="🍎">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>June 07, 2023</time>
@@ -226,7 +231,7 @@ footer a{color:var(--sub)}
          Lot/code info: Lot Codes: 4024205, 4025305, 4032305, 4033305, 4034305, 4035305.  Best By Dates: 07/25/2024, 07/26/2024, 08/02/2024, 08/3/2024, 08/04/2024, and 08/5/2</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230607" data-s="terminated" data-t="🫐">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>June 07, 2023</time>
@@ -241,7 +246,7 @@ footer a{color:var(--sub)}
          Lot/code info: Lot Codes: 4153205, 4283202, 4284202, 4058302, 4059302.  Best By Dates: 12/02/2023, 04/10/2024, 04/11/2024, 08/28/2024, 08/29/2024.</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230607" data-s="terminated" data-t="🍎">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>June 07, 2023</time>
@@ -256,7 +261,7 @@ footer a{color:var(--sub)}
          Lot/code info: Lot Code:  4032305   Best By Date: 8/2/2024</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230605" data-s="terminated" data-t="🧊">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>June 05, 2023</time>
@@ -271,7 +276,7 @@ footer a{color:var(--sub)}
          Lot/code info: 20082D04/BEST IF USED BY 09/23/2023, 20082D05/BEST IF USED BY 09/23/2023, 20082D06/BEST IF USED BY 09/23/2023, 20082D07/BEST IF USED BY 09/23/2023, 20</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230331" data-s="terminated" data-t="🍫">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>March 31, 2023</time>
@@ -286,7 +291,7 @@ footer a{color:var(--sub)}
          Lot/code info: All lots within shelf life. Best Before date between 11 APR 2023 and 14 MAR 2024</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20230323" data-s="terminated" data-t="🌾">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>March 23, 2023</time>
@@ -301,7 +306,7 @@ footer a{color:var(--sub)}
          Lot/code info: Lot 23068 - C023 FG00323</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20210115" data-s="terminated" data-t="🌾">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>January 15, 2021</time>
@@ -316,7 +321,7 @@ footer a{color:var(--sub)}
          Lot/code info: All Best By dates up to and including MAR 15,2022</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20151015" data-s="terminated" data-t="🧃">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>October 15, 2015</time>
@@ -331,7 +336,7 @@ footer a{color:var(--sub)}
          Lot/code info: 12 pack: Best Before dates include  03/20/2018 to 05/15/2018</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20151015" data-s="terminated" data-t="🛒">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>October 15, 2015</time>
@@ -346,7 +351,7 @@ footer a{color:var(--sub)}
          Lot/code info: 12 pack: Best Before dates include  05/07/18 to 05/09/2018.</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20151015" data-s="terminated" data-t="🧃">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>October 15, 2015</time>
@@ -361,7 +366,7 @@ footer a{color:var(--sub)}
          Lot/code info: 12 pack:Best Before dates include  03/05/2018 to 04/11/2018.  6 pack Best Befroe dates include 3/02/2018 to 04/15/2018.</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20151015" data-s="terminated" data-t="🍎">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>October 15, 2015</time>
@@ -376,7 +381,7 @@ footer a{color:var(--sub)}
          Lot/code info: Gift # where Martinelli 8.4 FL. oz. Sparkling Cider was used F159765-CO   Gift Basket Name Elegant Sophistication  Item # FOD 0110</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20151015" data-s="terminated" data-t="🛒">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>October 15, 2015</time>
@@ -391,7 +396,7 @@ footer a{color:var(--sub)}
          Lot/code info: 12 pack: Best Before dates include  05.28/18 to 09/04/2018.  6 pack Best Before dates include 08/31/18 to 09/11/2018.</p>
     </article>
 
-    <article class="recall">
+    <article class="recall" data-d="20121001" data-s="terminated" data-t="🥫">
       <div class="recall-head">
         <span class="badge badge-done">Terminated</span>
         <time>October 01, 2012</time>
@@ -431,6 +436,23 @@ document.getElementById('rsearch').addEventListener('input', function(){
   document.getElementById('rnone').style.display =
     (q && shown === 0) ? '' : 'none';
 });
+function resort(mode){
+  var sec = document.querySelector('section[aria-label="Current recalls"]');
+  var cards = Array.prototype.slice.call(sec.querySelectorAll('article.recall'));
+  cards.sort(function(a,b){
+    var db = parseInt(b.dataset.d||0) - parseInt(a.dataset.d||0);
+    if (mode === 'new') return db;
+    if (mode === 'type'){
+      var t = (a.dataset.t||'').localeCompare(b.dataset.t||'');
+      return t !== 0 ? t : db;
+    }
+    var sa = a.dataset.s === 'ongoing' ? 0 : 1;
+    var sb = b.dataset.s === 'ongoing' ? 0 : 1;
+    return (sa - sb) || db;
+  });
+  cards.forEach(function(c){ sec.appendChild(c); });
+}
+document.getElementById('rsort').addEventListener('change', function(){ resort(this.value); });
 </script>
 <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 </body>

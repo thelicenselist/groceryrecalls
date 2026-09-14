@@ -68,20 +68,27 @@ def parse_product(desc):
     if len(t) > 90: t = t[:90].rsplit(" ", 1)[0] + "…"
     return t, sizes[:3], upcs[:3]
 
+def _sort_key(r):
+    terminated = ((r.get("status") or "").lower() != "ongoing")
+    try: d = int(r.get("recall_initiation_date") or 0)
+    except Exception: d = 0
+    return (terminated, -d)
+
 cards = []
-for rec in data.get("results", []):
+for rec in sorted(data.get("results") or [], key=_sort_key):
     status = esc(rec.get("status",""))
     badge = "badge-active" if status.lower() == "ongoing" else "badge-done"
     title, sizes, upcs = parse_product(rec.get("product_description"))
+    icon = pick_icon(rec.get("product_description"))
     chips = "".join(f'<span class="chip">{esc(s)}</span>' for s in sizes)
     chips += "".join(f'<span class="chip">UPC {esc(u)}</span>' for u in upcs)
     cards.append(f"""
-    <article class="recall">
+    <article class="recall" data-d="{rec.get('recall_initiation_date') or 0}" data-s="{esc(status).lower()}" data-t="{icon}">
       <div class="recall-head">
         <span class="badge {badge}">{esc(status) or 'Status unknown'}</span>
         <time>{fmt_date(rec.get('recall_initiation_date'))}</time>
       </div>
-      <h3>{pick_icon(rec.get('product_description'))} {esc(title)}</h3>
+      <h3>{icon} {esc(title)}</h3>
       {f'<div class="chips">{chips}</div>' if chips else ''}
       <p class="reason"><strong>Why:</strong> {esc(rec.get('reason_for_recall',''))[:400]}</p>
       <details class="fulldesc"><summary>Full product details</summary>

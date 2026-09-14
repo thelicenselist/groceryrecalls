@@ -72,6 +72,11 @@ footer a{color:var(--sub)}
 <input id="rsearch" type="search"
  placeholder="Search these recalls — brand, product, or code number"
  style="width:100%;padding:12px 16px 12px 44px;font-size:1rem;border:2px solid var(--accent);border-radius:12px;margin:0 0 6px;background:#fff url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2218%22 height=%2218%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%235b6470%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22/><line x1=%2221%22 y1=%2221%22 x2=%2216.65%22 y2=%2216.65%22/></svg>') no-repeat 14px center">
+<select id="rsort" style="width:100%;padding:10px 14px;font-size:.95rem;border:1px solid var(--line);border-radius:12px;margin:0 0 6px;background:#fff;color:var(--ink)">
+  <option value="active">Sort: Active recalls first</option>
+  <option value="new">Sort: Newest first</option>
+  <option value="type">Sort: Food type</option>
+</select>
 <p id="rnone" style="display:none;color:var(--sub);padding:12px 4px">No matches in current recalls. If you're worried about a specific item, check the official list at fda.gov.</p>
 
   <section aria-label="Current recalls">
@@ -102,6 +107,23 @@ document.getElementById('rsearch').addEventListener('input', function(){
   document.getElementById('rnone').style.display =
     (q && shown === 0) ? '' : 'none';
 });
+function resort(mode){
+  var sec = document.querySelector('section[aria-label="Current recalls"]');
+  var cards = Array.prototype.slice.call(sec.querySelectorAll('article.recall'));
+  cards.sort(function(a,b){
+    var db = parseInt(b.dataset.d||0) - parseInt(a.dataset.d||0);
+    if (mode === 'new') return db;
+    if (mode === 'type'){
+      var t = (a.dataset.t||'').localeCompare(b.dataset.t||'');
+      return t !== 0 ? t : db;
+    }
+    var sa = a.dataset.s === 'ongoing' ? 0 : 1;
+    var sb = b.dataset.s === 'ongoing' ? 0 : 1;
+    return (sa - sb) || db;
+  });
+  cards.forEach(function(c){ sec.appendChild(c); });
+}
+document.getElementById('rsort').addEventListener('change', function(){ resort(this.value); });
 </script>
 <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 </body>
