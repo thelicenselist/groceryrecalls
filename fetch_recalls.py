@@ -78,6 +78,13 @@ cards = []
 ongoing_count = 0
 for rec in sorted(data.get("results") or [], key=_sort_key):
     status = esc(rec.get("status",""))
+    s_low = status.lower()
+    if s_low == "ongoing":
+        s_label = "Active recall"
+    elif s_low == "terminated":
+        s_label = "Not active"
+    else:
+        s_label = status or "Status unknown"
     if status.lower() == "ongoing": ongoing_count += 1
     badge = "badge-active" if status.lower() == "ongoing" else "badge-done"
     title, sizes, upcs = parse_product(rec.get("product_description"))
@@ -87,7 +94,7 @@ for rec in sorted(data.get("results") or [], key=_sort_key):
     cards.append(f"""
     <article class="recall" data-d="{rec.get('recall_initiation_date') or 0}" data-s="{esc(status).lower()}" data-t="{icon}">
       <div class="recall-head">
-        <span class="badge {badge}">{esc(status) or 'Status unknown'}</span>
+        <span class="badge {badge}" title="FDA status: {esc(status) or 'unknown'}">{s_label}</span>
         <time>{fmt_date(rec.get('recall_initiation_date'))}</time>
       </div>
       <h3>{icon} {esc(title)}</h3>
