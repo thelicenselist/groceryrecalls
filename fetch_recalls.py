@@ -4,7 +4,7 @@ FDA's free public API and bakes them into that retailer's page HTML.
 Each retailer reads <slug>/template.html and writes <slug>/index.html.
 Runs on a schedule via GitHub Actions. No credentials needed.
 """
-import json, re, urllib.request, urllib.error
+import json, os, re, urllib.request, urllib.error
 from datetime import datetime, timezone
 
 RETAILERS = [
@@ -84,6 +84,11 @@ def _sort_key(r):
 def build(slug, api_query):
     name = slug.capitalize()  # "costco" -> "Costco", "walmart" -> "Walmart"
     data = fetch(api_query)
+    # raw results for alert_bot.py (git-ignored; lives only for this run)
+    os.makedirs("data/latest", exist_ok=True)
+    with open(f"data/latest/{slug}.json", "w", encoding="utf-8") as f:
+        json.dump({"fetched_at": datetime.now(timezone.utc).isoformat(),
+                   "results": data.get("results") or []}, f)
 
     cards = []
     ongoing_count = 0
@@ -132,5 +137,6 @@ def build(slug, api_query):
     open(f"{slug}/index.html","w", encoding="utf-8").write(html)
     print(f"Wrote {slug}/index.html — {len(cards)} recalls, updated {updated}")
 
-for slug, api_query in RETAILERS:
-    build(slug, api_query)
+if __name__ == "__main__":
+    for slug, api_query in RETAILERS:
+        build(slug, api_query)

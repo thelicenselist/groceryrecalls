@@ -2,9 +2,15 @@ name: Refresh recall data
 on:
   schedule:
     - cron: "17 11 * * *"   # daily, 11:17 UTC (~6:17am Central)
-  workflow_dispatch: {}      # manual "run now" button
+  workflow_dispatch:         # manual "run now" button
+    inputs:
+      digest_now:
+        description: "Also file the weekly digest issue now (to test the email chain)"
+        type: boolean
+        default: false
 permissions:
   contents: write
+  issues: write
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -13,10 +19,15 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: python fetch_recalls.py
+      - name: Recall alerts and Monday digest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python alert_bot.py --post ${{ inputs.digest_now && '--force-digest' || '' }}
       - name: Commit if changed
+        if: ${{ !cancelled() }}   # still publish pages if the alert step hiccups
         run: |
           git config user.name "recall-bot"
           git config user.email "actions@github.com"
-          git add costco/index.html walmart/index.html
+          git add costco/index.html walmart/index.html data/state.json
           git diff --cached --quiet || git commit -m "Daily recall refresh"
           git push
