@@ -17,6 +17,6 @@ jobs:
         run: |
           git config user.name "recall-bot"
           git config user.email "actions@github.com"
-          git add costco/index.html
+          git add costco/index.html walmart/index.html
           git diff --cached --quiet || git commit -m "Daily recall refresh"
           git push
