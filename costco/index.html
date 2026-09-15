@@ -30,7 +30,7 @@ header.site span{color:var(--accent)}
 h1{font-size:2rem;line-height:1.2;letter-spacing:-.03em}
 .sub{color:var(--sub);margin:10px 0 0}
 .updated{display:inline-block;margin:14px 0 0;font-size:.85rem;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:99px;padding:4px 12px}
-.statusline{display:inline-block;margin:10px 0 0;font-weight:600;font-size:.95rem;border-radius:99px;padding:6px 14px}
+.statusline{display:inline-block;margin:12px 0 0;font-weight:700;font-size:1.25rem;border-radius:99px;padding:10px 20px}
 .statusline.ok{background:#e8f2ee;color:var(--accent)}
 .statusline.warn{background:#fdecea;color:var(--warn)}
 .signup{margin:28px 0;padding:22px;background:#fff;border:1px solid var(--line);border-radius:12px}
@@ -39,7 +39,7 @@ h1{font-size:2rem;line-height:1.2;letter-spacing:-.03em}
 .recall{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
 .recall-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .recall-head time{color:var(--sub);font-size:.85rem}
-.badge{font-size:.75rem;font-weight:600;border-radius:99px;padding:3px 10px}
+.badge{font-size:.9rem;font-weight:700;border-radius:99px;padding:5px 13px}
 .badge-active{background:#fdecea;color:var(--warn)}
 .badge-done{background:#e8f2ee;color:var(--accent)}
 .recall h3{font-size:1.02rem;line-height:1.4;margin-bottom:8px}
@@ -64,7 +64,7 @@ footer a{color:var(--sub)}
   <div class="hero">
     <h1>Costco Recalls</h1>
     <p class="sub">Active and past Costco and Kirkland Signature food recalls, in one place — pulled from official FDA enforcement data.</p>
-    <span class="updated">Updated September 14, 2026 &middot; 22 recalls listed</span>
+    <span class="updated">Updated September 15, 2026 &middot; 22 recalls listed</span>
     <div><span class="statusline ok">✓ No active Costco recalls right now</span></div>
   </div>
 
@@ -87,7 +87,7 @@ footer a{color:var(--sub)}
     
     <article class="recall" data-d="20260529" data-s="terminated" data-t="🥐">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>May 29, 2026</time>
       </div>
       <h3>🥐 Motor City Pizza Co. 5 Cheese Bread Single retail pack</h3>
@@ -102,7 +102,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20260406" data-s="terminated" data-t="🥐">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>April 06, 2026</time>
       </div>
       <h3>🥐 Kirkland Signature Traditional Madeleines 12 Count/net wt. 18oz</h3>
@@ -117,7 +117,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20260131" data-s="terminated" data-t="🥐">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>January 31, 2026</time>
       </div>
       <h3>🥐 Kirkland Signature Costco</h3>
@@ -132,7 +132,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20251107" data-s="terminated" data-t="🥫">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>November 07, 2025</time>
       </div>
       <h3>🥫 Costco Item# 11444 Kirkland Signature Chicken Sandwich with Caesar Salad, refrigerated,…</h3>
@@ -147,7 +147,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20251107" data-s="terminated" data-t="🥫">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>November 07, 2025</time>
       </div>
       <h3>🥫 Costco Item# 19927 Kirkland Signature Caesar Salad, refrigerated, packaged in clear…</h3>
@@ -162,7 +162,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20240703" data-s="terminated" data-t="🥬">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>July 03, 2024</time>
       </div>
       <h3>🥬 The recalled product is mis-labeled as  Ancient Grain + Vegetable Salad</h3>
@@ -177,7 +177,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230928" data-s="terminated" data-t="🍫">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>September 28, 2023</time>
       </div>
       <h3>🍫 Organic Protein &amp; 50 Superfoods Protein Powder with Probiotic - Chocolate flavor</h3>
@@ -192,7 +192,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230607" data-s="terminated" data-t="🧃">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>June 07, 2023</time>
       </div>
       <h3>🧃 Rader Farms Organic Fresh Start Smoothie Blueberry, Strawberry, Raspberry, Kale, Spinach</h3>
@@ -207,7 +207,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230607" data-s="terminated" data-t="🧊">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>June 07, 2023</time>
       </div>
       <h3>🧊 Great Value Sliced Strawberries</h3>
@@ -222,7 +222,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230607" data-s="terminated" data-t="🍎">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>June 07, 2023</time>
       </div>
       <h3>🍎 Great Value Mixed Fruit Pineapple, Strawberries, Peaches and Mango</h3>
@@ -237,7 +237,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230607" data-s="terminated" data-t="🫐">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>June 07, 2023</time>
       </div>
       <h3>🫐 Rader Farms Organic Berry Trio Strawberry, Blackberry, Raspberry</h3>
@@ -252,7 +252,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230607" data-s="terminated" data-t="🍎">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>June 07, 2023</time>
       </div>
       <h3>🍎 Great Value Antioxidant Fruit Blend Strawberries, Blueberries, Raspberries, Pitted Dark…</h3>
@@ -267,7 +267,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230605" data-s="terminated" data-t="🧊">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>June 05, 2023</time>
       </div>
       <h3>🧊 Organic Daybreak Blend Brand Name: Wawona Frozen Foods 4 lb. plastic bags - 10 bags per…</h3>
@@ -282,7 +282,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230331" data-s="terminated" data-t="🍫">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>March 31, 2023</time>
       </div>
       <h3>🍫 SimplyProtein¿ Peanut Butter Chocolate Crispy 15-1.41 OZ (40 g) bar. (UPC 6 86207 00914…</h3>
@@ -297,7 +297,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20230323" data-s="terminated" data-t="🌾">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>March 23, 2023</time>
       </div>
       <h3>🌾 Volupta Organic Black Chia Seeds 64 oz.  Best By: 10/31/2025 Stand up pouch. Product of…</h3>
@@ -312,7 +312,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20210115" data-s="terminated" data-t="🌾">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>January 15, 2021</time>
       </div>
       <h3>🌾 One Degree Organic Foods Gluten Free Sprouted Rolled Oats NET WT. 5 lbs (80 oz) 2.27 kg</h3>
@@ -327,7 +327,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20151015" data-s="terminated" data-t="🧃">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>October 15, 2015</time>
       </div>
       <h3>🧃 Martinelli's Sparkling Northwest Blend Cider ,  8.4 oz glass bottles (250 mL)</h3>
@@ -342,7 +342,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20151015" data-s="terminated" data-t="🛒">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>October 15, 2015</time>
       </div>
       <h3>🛒 Martinelli's Sparkling White Grape, 8.4 oz glass bottles (250 mL)</h3>
@@ -357,7 +357,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20151015" data-s="terminated" data-t="🧃">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>October 15, 2015</time>
       </div>
       <h3>🧃 Martinelli's Gold Medal Sparkling Cider, 8.4 oz glass bottles</h3>
@@ -372,7 +372,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20151015" data-s="terminated" data-t="🍎">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>October 15, 2015</time>
       </div>
       <h3>🍎 Elegant sophistication gift basket containing apple cidar in glass bottles. The label on…</h3>
@@ -387,7 +387,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20151015" data-s="terminated" data-t="🛒">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>October 15, 2015</time>
       </div>
       <h3>🛒 Martinelli's Sparkling Red Grape, 8.4 oz glass bottles (250 mL)</h3>
@@ -402,7 +402,7 @@ footer a{color:var(--sub)}
 
     <article class="recall" data-d="20121001" data-s="terminated" data-t="🥫">
       <div class="recall-head">
-        <span class="badge badge-done">Terminated</span>
+        <span class="badge badge-done" title="FDA status: Terminated">Not active</span>
         <time>October 01, 2012</time>
       </div>
       <h3>🥫 Cold-Smoked Atlantic Salmon in vacuum packed plastic, labeled in part: "FOPPEN NORWEGIAN…</h3>
@@ -427,6 +427,10 @@ footer a{color:var(--sub)}
   </section>
 </main>
 <footer class="wrap">
+<p style="margin-bottom:10px"><strong style="color:var(--ink);font-size:.85rem">More free sites from us:</strong><br>
+<a href="https://thelicenselist.com" target="_blank" rel="noopener">The License List</a> — check a contractor's state license, verified against state records &middot;
+<a href="https://reverseduedatecalculator.com" target="_blank" rel="noopener">Reverse Due Date Calculator</a> &middot;
+<a href="https://conceptioncalculators.com" target="_blank" rel="noopener">Conception Calculators</a> — free pregnancy planning tools</p>
   <p>groceryrecalls.com is an independent information site, not affiliated with Costco Wholesale Corporation or any government agency. Recall data is drawn from public FDA sources and provided for general guidance — always follow the official recall notice. &middot; <a href="/">Home</a></p>
 </footer>
 <script>
