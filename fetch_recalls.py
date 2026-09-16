@@ -118,7 +118,8 @@ def build(slug, api_query):
             "label": {"ongoing": "Active recall", "terminated": "Not active"}.get(
                 raw_status, rec.get("status") or "Status unknown"),
             "terms": ((rec.get("product_description") or "") + " "
-                      + (rec.get("code_info") or "")).lower()[:600],
+                      + (rec.get("code_info") or "")).lower()[:600]
+                     + f" {name.lower()} {slug}",  # after the clip, so it's never cut off
         })
         cards.append(f"""
     <article class="recall" data-d="{rec.get('recall_initiation_date') or 0}" data-s="{esc(status).lower()}" data-t="{icon}">
