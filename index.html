@@ -100,8 +100,12 @@ footer{margin:44px 0 30px;padding-top:18px;border-top:1px solid #e5e8ec;font-siz
     if (data === null) { load().then(render); return; }
     if (data === false) { out.appendChild(el('p', 'hnote', 'Search is unavailable right now — pick a store below.')); return; }
     var hits = data.filter(function(r){ return (r.terms || '').indexOf(q) !== -1; });
+    // if the query is a store we track, that store's own recalls rank first
+    function own(r){ return (r.slug === q || (r.store || '').toLowerCase() === q) ? 0 : 1; }
     hits.sort(function(a, b){
-      return ((a.status === 'ongoing' ? 0 : 1) - (b.status === 'ongoing' ? 0 : 1)) || ((b.d || 0) - (a.d || 0));
+      return (own(a) - own(b))
+        || ((a.status === 'ongoing' ? 0 : 1) - (b.status === 'ongoing' ? 0 : 1))
+        || ((b.d || 0) - (a.d || 0));
     });
     if (!hits.length) { out.appendChild(el('p', 'hnote', 'No matches at any store we track — check fda.gov to be sure.')); return; }
     hits.slice(0, 12).forEach(function(r){
