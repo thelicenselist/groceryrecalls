@@ -28,6 +28,17 @@ h1{font-size:2rem;margin:40px 0 8px;letter-spacing:-.03em}
 .store strong{font-size:1.1rem}
 .store em{display:block;color:#5b6470;font-style:normal;font-size:.9rem;margin-top:4px}
 .soon{opacity:.55}
+.badge{font-size:.78rem;font-weight:700;border-radius:99px;padding:3px 10px;white-space:nowrap;flex:none}
+.badge-active{background:#fdecea;color:#b3261e}
+.badge-done{background:#e8f2ee;color:#0b6e4f}
+#hresults{margin:4px 0 18px}
+.hrow{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5e8ec;border-radius:10px;padding:10px 14px;margin:6px 0;text-decoration:none;color:#1a1d21}
+.hrow:hover{border-color:#0b6e4f}
+.hicon{font-size:1.3rem;flex:none}
+.hmain{flex:1;min-width:0}
+.htitle{display:block;font-weight:600;font-size:.95rem;line-height:1.35}
+.hmeta{display:block;color:#5b6470;font-size:.8rem;margin-top:2px}
+.hnote{color:#5b6470;font-size:.9rem;padding:8px 2px}
 footer{margin:44px 0 30px;padding-top:18px;border-top:1px solid #e5e8ec;font-size:.82rem;color:#5b6470}
 </style>
 </head>
@@ -36,6 +47,15 @@ footer{margin:44px 0 30px;padding-top:18px;border-top:1px solid #e5e8ec;font-siz
 <main class="wrap">
   <h1>Food recalls, by the store you shop at</h1>
   <p class="sub">Official government recall data, organized the way people actually shop — by store — and refreshed daily.</p>
+  <div class="store" style="cursor:default">
+    <strong>Get recall alerts by email</strong>
+    <em style="margin-bottom:12px">Free — the day a recall drops, plus a short weekly digest. No spam, unsubscribe anytime.</em>
+    <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="b7ffbc5d-8285-4d41-a89b-91e80b0c027d"></script>
+  </div>
+  <input id="hsearch" type="search" aria-label="Search recalls at any store"
+   placeholder="Search recalls at any store — product, brand, or code"
+   style="width:100%;box-sizing:border-box;padding:12px 16px 12px 44px;font-size:1rem;border:2px solid #0b6e4f;border-radius:12px;margin:6px 0 6px;background:#fff url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2218%22 height=%2218%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%235b6470%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22/><line x1=%2221%22 y1=%2221%22 x2=%2216.65%22 y2=%2216.65%22/></svg>') no-repeat 14px center">
+  <div id="hresults" aria-live="polite"></div>
   <a class="store" href="/costco/"><strong>Costco Recalls →</strong><em>Kirkland Signature and all Costco food recalls, updated daily</em></a>
   <a class="store" href="/walmart/"><strong>Walmart Recalls →</strong><em>Great Value and all Walmart food recalls, updated daily</em></a>
   <div class="store soon"><strong>Kroger Recalls</strong><em>Coming soon</em></div>
@@ -46,11 +66,6 @@ footer{margin:44px 0 30px;padding-top:18px;border-top:1px solid #e5e8ec;font-siz
   <div class="store soon"><strong>Whole Foods Recalls</strong><em>Coming soon</em></div>
   <div class="store soon"><strong>Publix Recalls</strong><em>Coming soon</em></div>
   <p style="color:#5b6470;font-size:.9rem;margin:16px 0 0">Also on the roadmap: Safeway, H-E-B, Meijer, Wegmans, Albertsons, and more. Want your store next? Sign up for alerts and reply to any email to tell us.</p>
-  <div class="store" style="cursor:default">
-    <strong>Get recall alerts by email</strong>
-    <em style="margin-bottom:12px">Free — the day a recall drops, plus a short weekly digest. No spam, unsubscribe anytime.</em>
-    <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="b7ffbc5d-8285-4d41-a89b-91e80b0c027d"></script>
-  </div>
 </main>
 <footer class="wrap">
 <p style="margin-bottom:10px"><strong style="color:#1a1d21;font-size:.85rem">More free sites from us:</strong><br>
@@ -58,6 +73,53 @@ footer{margin:44px 0 30px;padding-top:18px;border-top:1px solid #e5e8ec;font-siz
 <a href="https://reverseduedatecalculator.com" target="_blank" rel="noopener">Reverse Due Date Calculator</a> &middot;
 <a href="https://conceptioncalculators.com" target="_blank" rel="noopener">Conception Calculators</a> — free pregnancy planning tools</p>
 <p>Independent information site. Not affiliated with any retailer or government agency. Always follow the official recall notice.</p></footer>
+<script>
+(function(){
+  var box = document.getElementById('hsearch');
+  var out = document.getElementById('hresults');
+  var data = null, loading = null;
+  function load(){
+    if (!loading) {
+      loading = fetch('/data/recalls.json')
+        .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function(d){ data = d; })
+        .catch(function(){ data = false; });
+    }
+    return loading;
+  }
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function render(){
+    var q = box.value.trim().toLowerCase();
+    out.textContent = '';
+    if (!q) return;
+    if (data === null) { load().then(render); return; }
+    if (data === false) { out.appendChild(el('p', 'hnote', 'Search is unavailable right now — pick a store below.')); return; }
+    var hits = data.filter(function(r){ return (r.terms || '').indexOf(q) !== -1; });
+    hits.sort(function(a, b){
+      return ((a.status === 'ongoing' ? 0 : 1) - (b.status === 'ongoing' ? 0 : 1)) || ((b.d || 0) - (a.d || 0));
+    });
+    if (!hits.length) { out.appendChild(el('p', 'hnote', 'No matches at any store we track — check fda.gov to be sure.')); return; }
+    hits.slice(0, 12).forEach(function(r){
+      var a = el('a', 'hrow');
+      a.href = '/' + encodeURIComponent(r.slug) + '/';
+      a.appendChild(el('span', 'hicon', r.icon));
+      var main = el('span', 'hmain');
+      main.appendChild(el('span', 'htitle', r.title));
+      main.appendChild(el('span', 'hmeta', r.store + ' · ' + r.date));
+      a.appendChild(main);
+      a.appendChild(el('span', 'badge ' + (r.status === 'ongoing' ? 'badge-active' : 'badge-done'), r.label));
+      out.appendChild(a);
+    });
+    if (hits.length > 12) out.appendChild(el('p', 'hnote', 'Showing 12 of ' + hits.length + ' matches — try a more specific search.'));
+  }
+  box.addEventListener('input', function(){ load(); render(); });
+})();
+</script>
 <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 </body>
 </html>

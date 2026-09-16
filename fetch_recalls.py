@@ -91,6 +91,7 @@ def build(slug, api_query):
                    "results": data.get("results") or []}, f)
 
     cards = []
+    records = []  # for data/recalls.json (homepage cross-store search)
     ongoing_count = 0
     for rec in sorted(data.get("results") or [], key=_sort_key):
         status = esc(rec.get("status",""))
@@ -107,6 +108,18 @@ def build(slug, api_query):
         icon = pick_icon(rec.get("product_description"))
         chips = "".join(f'<span class="chip">{esc(s)}</span>' for s in sizes)
         chips += "".join(f'<span class="chip">UPC {esc(u)}</span>' for u in upcs)
+        raw_status = (rec.get("status") or "").lower()
+        try: d_num = int(rec.get("recall_initiation_date") or 0)
+        except Exception: d_num = 0
+        records.append({
+            "store": name, "slug": slug, "title": title, "icon": icon,
+            "date": fmt_date(rec.get("recall_initiation_date")), "d": d_num,
+            "status": raw_status,
+            "label": {"ongoing": "Active recall", "terminated": "Not active"}.get(
+                raw_status, rec.get("status") or "Status unknown"),
+            "terms": ((rec.get("product_description") or "") + " "
+                      + (rec.get("code_info") or "")).lower()[:600],
+        })
         cards.append(f"""
     <article class="recall" data-d="{rec.get('recall_initiation_date') or 0}" data-s="{esc(status).lower()}" data-t="{icon}">
       <div class="recall-head">
@@ -136,7 +149,12 @@ def build(slug, api_query):
     html = html.replace("<!--STATUS-->", sline)
     open(f"{slug}/index.html","w", encoding="utf-8").write(html)
     print(f"Wrote {slug}/index.html — {len(cards)} recalls, updated {updated}")
+    return records
 
 if __name__ == "__main__":
+    all_records = []
     for slug, api_query in RETAILERS:
-        build(slug, api_query)
+        all_records += build(slug, api_query)
+    with open("data/recalls.json", "w", encoding="utf-8") as f:
+        json.dump(all_records, f, ensure_ascii=False, separators=(",", ":"))
+    print(f"Wrote data/recalls.json — {len(all_records)} recalls across {len(RETAILERS)} stores")
